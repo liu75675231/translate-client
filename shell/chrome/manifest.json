@@ -1,0 +1,27 @@
+{
+    "name": "translate and learn",
+    "manifest_version": 2,
+    "version": "1.0",
+    "description": "翻译软件哦",
+    "browser_action": {
+        "default_icon": "./imgs/logo16.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "css": ["style/index.css"],
+            "js": [
+                "lib/jquery-3.4.1.min.js",
+                "contentScript.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": ["lib/jquery-3.4.1.min.js", "background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "storage",
+        "https://cn.bing.com/"
+    ]
+}
