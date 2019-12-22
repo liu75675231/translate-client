@@ -211,7 +211,10 @@ function resetStorageDataToHtml (data) {
 }
 function insertToHtml (data) {
     var $selector = $(data.selector);
-    var html = $selector.html();
-    html = html.replace(data.text, data.text + `<span style="background-color: #ff0000; color: #fff;">（${ data.targetText }）</span>`);
-    $selector.html(html);
+    if ($selector.length > 0) {
+        var html = $selector.html();
+        html = html.replace(data.text, data.text + `<span style="background-color: #ff0000; color: #fff;">（${ data.targetText }）</span>`);
+        $selector.html(html);
+    }
+
 }
