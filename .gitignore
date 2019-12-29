@@ -1,3 +1,4 @@
 /output/*
 /node_modules/*
-node_modules
+/shell/chrome/node_modules/*
+/shell/dev/node_modules/*
