@@ -1,0 +1,9 @@
+{
+    "name": "@translate-client/shell-chrome",
+    "version": "0.0.0",
+    "dependencies": {},
+    "devDependencies": {
+        "webpack": "^4.41.5",
+        "webpack-cli": "^3.3.10"
+    }
+}

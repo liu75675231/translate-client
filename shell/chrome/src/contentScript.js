@@ -216,5 +216,4 @@ function insertToHtml (data) {
         html = html.replace(data.text, data.text + `<span style="background-color: #ff0000; color: #fff;">（${ data.targetText }）</span>`);
         $selector.html(html);
     }
-
 }
