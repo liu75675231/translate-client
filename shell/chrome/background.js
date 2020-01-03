@@ -2,6 +2,12 @@ chrome.tabs.executeScript({
     file: 'contentScript.js'
 });
 
+function genericOnClick(info, tab) {
+    console.log("click info:")
+    console.log(info)
+}
+
+
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.action == "ajaxTrans") {
@@ -13,5 +19,17 @@ chrome.runtime.onMessage.addListener(
             });
             return true;
         }
-    });
+    }
+);
 
+
+chrome.contextMenus.create({
+        type: 'normal',
+        title: '翻译',
+        id: 'menu_trans_client',
+        contexts: ['all'],
+        onclick: genericOnClick
+    }, function(){
+        console.log('翻译菜单创建');
+    }
+);

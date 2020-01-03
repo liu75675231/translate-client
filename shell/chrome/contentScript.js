@@ -35,6 +35,8 @@ document.addEventListener('mouseup', function (e) {
     text = selected.text;
     hideTranslateTemplateHtml();
 });
+
+
 function showImg (pos) {
     let img = document.getElementById('im1');
     if (!img) {
