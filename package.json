@@ -3,21 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "shell/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cd shell/dev && webpack-dev-server --open",
+    "dev:chrome": "cd shell/chrome && webpack --config webpack.config.js --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/liu75675231/translate-client.git"
-  },
+  "repository": "git+https://github.com/liu75675231/translate-client.git",
   "keywords": [],
-  "author": "",
+  "author": "liu75675231 <liuhaitao123>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/liu75675231/translate-client/issues"
   },
   "homepage": "https://github.com/liu75675231/translate-client#readme",
   "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
     "jsdom": "^15.2.1"
   }
 }

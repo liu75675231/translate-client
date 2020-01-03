@@ -1,2 +1,5 @@
-/output/*
 /node_modules/*
+shell/chrome/node_modules/*
+shell/dev/node_modules/*
+yarn-error.log
+.idea/*

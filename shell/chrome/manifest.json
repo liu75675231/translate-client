@@ -12,12 +12,12 @@
             "css": ["style/index.css"],
             "js": [
                 "lib/jquery-3.4.1.min.js",
-                "contentScript.js"
+                "build/contentScript.js"
             ]
         }
     ],
     "background": {
-        "scripts": ["lib/jquery-3.4.1.min.js", "background.js"],
+        "scripts": ["lib/jquery-3.4.1.min.js", "build/background.js"],
         "persistent": false
     },
     "permissions": [
