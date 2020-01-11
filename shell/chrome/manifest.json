@@ -24,6 +24,7 @@
         "contextMenus",
         "tabs",
         "storage",
-        "https://cn.bing.com/"
+        "https://cn.bing.com/",
+        "contextMenus"        
     ]
 }
