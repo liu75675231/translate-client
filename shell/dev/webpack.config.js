@@ -9,12 +9,13 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.join(__dirname, '/build'),
+        contentBase: "./build",
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-          title: 'Development'
+          title: '开发环境',
+          template: path.resolve(__dirname, 'index.html'),
         })
       ],
     output: {

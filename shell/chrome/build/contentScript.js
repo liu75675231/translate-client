@@ -1,1 +1,323 @@
-!function(t){var e={};function n(o){if(e[o])return e[o].exports;var i=e[o]={i:o,l:!1,exports:{}};return t[o].call(i.exports,i,i.exports,n),i.l=!0,i.exports}n.m=t,n.c=e,n.d=function(t,e,o){n.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:o})},n.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},n.t=function(t,e){if(1&e&&(t=n(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var i in t)n.d(o,i,function(e){return t[e]}.bind(null,i));return o},n.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return n.d(e,"a",e),e},n.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},n.p="",n(n.s=1)}([,function(t,e){let n="",o={top:0,left:0};var i="",r="";function l(){let t=document.getElementById("im1");t&&(t.style="display: none;")}function c(t){let e=document.getElementById("tw-popup");if(!e){const t=document.createDocumentFragment();e=document.createElement("div"),e.id="tw-popup",t.appendChild(e),document.body.appendChild(t),e.addEventListener("mouseup",(function(t){t.stopPropagation()})),$(e).on("click",".tw-popup-meaning-word",(function(t){r=t.target.innerHTML,a(),p()}))}e.style=`top: ${o.top}px; left: ${o.left}px`,console.log(e),function(t,e){chrome.runtime.sendMessage({action:"ajaxTrans",type:"bing",text:t},(function(t){console.log(t.data);var n=(new DOMParser).parseFromString(t.data,"text/html");(t={title:"",pronList:[],meaningList:[]}).title=n.querySelector(".client_def_hd_hd").innerHTML,n.querySelectorAll(".client_def_hd_pn").forEach(e=>{t.pronList.push(e.innerHTML)}),n.querySelector(".client_def_container").querySelectorAll(".client_def_bar").forEach(e=>{const n=e.querySelector(".client_def_title");n&&t.meaningList.push({type:n.innerHTML,wordList:e.querySelector(".client_def_list_word_bar").innerHTML.split("；")})}),e(t)}))}(t,(function(t){const n=[];t.pronList.forEach((function(t){n.push(`<div class="tw-popup-pron-item">${t}</div>`)}));const o=[];t.meaningList.forEach((function(t){const e=[];t.wordList.forEach((function(t){e.push(`<div class="tw-popup-meaning-word">${t}</div>`)})),o.push(`\n                <div class="tw-popup-meaning-item">\n                    <div class="tw-popup-meaning-type">${t.type}</div>\n                    <div class="tw-popup-meaning-word-list">${e.join("")}</div>\n                </div>\n            `)}));let i=`\n            <div class="tw-popup">\n                <div class="tw-popup-title">${t.title}</div>\n                <div class="tw-popup-pron-list">${n.join("")}</div>\n                <div class="tw-popup-meaning-list">\n                    ${o.join("")}\n                </div>\n            </div>`;e.innerHTML=i}))}function a(){let t=localStorage.getItem("trans-data"),e=[];t&&(e=JSON.parse(t));var o={text:n,selector:i,targetText:r};e.push(o),localStorage.setItem("trans-data",JSON.stringify(e)),s(o)}function p(){const t=document.getElementById("tw-popup");t&&(t.style="display: none;")}function s(t){if(t)u(t);else{let t=localStorage.getItem("trans-data","data");t&&(t=t&&JSON.parse(t),t.forEach((function(t){u(t)})))}}function u(t){var e=$(t.selector);if(e.length>0){var n=e.html();n=n.replace(t.text,t.text+`<span style="background-color: #ff0000; color: #fff;">（${t.targetText}）</span>`),e.html(n)}}document.addEventListener("mouseup",(function(t){if("im1"===t.target.id)return;const e=function(){if(window.getSelection){var t=window.getSelection();return{text:t.toString(),pos:t.getRangeAt(0).getBoundingClientRect()}}}();if(e.text){let e=[];t.target.classList.forEach((function(t){e.push("."+t)})),i=e.join("");var r=$(i);r.length>0&&r.each((function(e,n){n===t.target&&(i+=`:eq(${e})`)})),o={left:t.pageX,top:t.pageY},function(t){let e=document.getElementById("im1");e||(e=document.createElement("img"),e.src="https://shuati-images.oss-cn-beijing.aliyuncs.com/images/logo32.png",e.id="im1",document.body.appendChild(e),e.addEventListener("click",(function(t){l(),t.stopPropagation(),n&&(c(n),window.getSelection?window.getSelection().empty?window.getSelection().empty():window.getSelection().removeAllRanges&&window.getSelection().removeAllRanges():document.selection&&document.selection.empty(),l())})));e.style="position: absolute; top: "+t.top+"px; left: "+t.left+"px;"}(o)}else l();n=e.text,p()})),s()}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/contentScript.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/contentScript.js":
+/*!******************************!*\
+  !*** ./src/contentScript.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+let text = '';
+let pos = {
+    top: 0,
+    left: 0,
+}
+var className = '';
+var chineseText = '';
+document.addEventListener('mouseup', function (e) {
+    if (e.target.id === 'im1') {
+        return;
+    }
+    const selected = getSelectedText();
+    if (selected.text ) {
+        let classList = [];
+        e.target.classList.forEach(function (elem) {
+            classList.push('.' + elem);
+        });
+        className = classList.join("");
+        var $domList = $(className);
+        if ($domList.length > 0) {
+            $domList.each(function (index, elem) {
+                if (elem === e.target) {
+                    className += `:eq(${ index })`;
+                }
+            });
+        }
+        pos = {
+            left: e.pageX + 10,
+            top: e.pageY,
+        }
+        showImg(pos);
+    } else {
+        hideImg();
+    }
+    text = selected.text;
+    hideTranslateTemplateHtml();
+});
+function showImg (pos) {
+    let img = document.getElementById('im1');
+    if (!img) {
+        img = document.createElement('img');
+        img.src = 'https://shuati-images.oss-cn-beijing.aliyuncs.com/images/logo32.png';
+        img.id = 'im1';
+        document.body.appendChild(img);
+        img.addEventListener('click', function (e) {
+            hideImg();
+            e.stopPropagation();
+            if (text) {
+                showTranslageTemplateHtml(text);
+                clearSelect();
+                hideImg();
+            }
+
+        });
+    }
+    img.style = 'position: absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px;';
+}
+function hideImg () {
+    let img = document.getElementById('im1');
+    if (img) {
+        img.style = 'display: none;';
+    }
+}
+function getSelectedText () {
+    if (window.getSelection) {  // all browsers, except IE before version 9
+        var range = window.getSelection ();
+        return {
+            text: range.toString (),
+            pos: range.getRangeAt(0).getBoundingClientRect()
+        };
+    }
+}
+
+function clearSelect () {
+    if (window.getSelection) {
+        if (window.getSelection().empty) {  // Chrome
+          window.getSelection().empty();
+        } else if (window.getSelection().removeAllRanges) {  // Firefox
+          window.getSelection().removeAllRanges();
+        }
+      } else if (document.selection) {  // IE?
+        document.selection.empty();
+      }
+}
+function showTranslageTemplateHtml(text) {
+    let doc = document.getElementById('tw-popup');
+    if (!doc) {
+        const frag = document.createDocumentFragment();
+        doc = document.createElement('div');
+        doc.id = 'tw-popup';
+        frag.appendChild(doc);
+        document.body.appendChild(frag);
+        doc.addEventListener('mouseup', function (e) {
+            e.stopPropagation();
+        });
+        $(doc).on("click", ".tw-popup-meaning-word", function (e) {
+            chineseText = e.target.innerHTML;
+            addToStorage();
+            hideTranslateTemplateHtml();
+        })
+
+    }
+
+    doc.style = `top: ${ pos.top }px; left: ${ pos.left }px`;
+    console.log(doc);
+    ajaxForBing(text, function (data) {
+
+        const pornStrList = [];
+        data.pronList.forEach(function (elem) {
+            pornStrList.push(`<div class="tw-popup-pron-item">${ elem }</div>`);
+        });
+
+        const meaningStrList = [];
+        data.meaningList.forEach(function (meaning) {
+            const wordStrList = [];
+            meaning.wordList.forEach(function (word) {
+                wordStrList.push(`<div class="tw-popup-meaning-word">${ word }</div>`);
+            });
+            meaningStrList.push(`
+                <div class="tw-popup-meaning-item">
+                    <div class="tw-popup-meaning-type">${ meaning.type }</div>
+                    <div class="tw-popup-meaning-word-list">${ wordStrList.join('') }</div>
+                </div>
+            `);
+        });
+        let template = `
+            <div class="tw-popup">
+                <div class="tw-popup-title">${ data.title }</div>
+                <div class="tw-popup-pron-list">${ pornStrList.join('') }</div>
+                <div class="tw-popup-meaning-list">
+                    ${ meaningStrList.join('') }
+                </div>
+            </div>`;
+
+
+        doc.innerHTML = template;
+    });
+}
+
+function addToStorage () {
+    let originDataStr = localStorage.getItem('trans-data'),
+        list = [];
+    if (originDataStr) {
+        list = JSON.parse(originDataStr);
+    }
+    var data = {
+        text: text,
+        selector: className,
+        targetText: chineseText,
+    }
+    list.push(data);
+    localStorage.setItem("trans-data", JSON.stringify(list))
+    resetStorageDataToHtml(data);
+}
+
+function hideTranslateTemplateHtml() {
+    const dom = document.getElementById('tw-popup');
+    if (dom) {
+        dom.style = 'display: none;';
+    }
+}
+
+function ajaxForBing (text, callback) {
+    chrome.runtime.sendMessage({
+        action: "ajaxTrans",
+        type: "bing",
+        text: text,
+    }, function (data) {
+        console.log(data.data);
+        var doc = new DOMParser().parseFromString(data.data, "text/html");
+        var data = {
+            title: '',
+            pronList: [],
+            meaningList: [],
+        };
+        data.title = doc.querySelector('.client_def_hd_hd').innerHTML;
+
+        const pinyinList = doc.querySelectorAll('.client_def_hd_pn');
+        pinyinList.forEach((elem) => {
+            data.pronList.push(elem.innerHTML);
+        });
+
+        const meaningList = doc.querySelector ('.client_def_container').querySelectorAll('.client_def_bar');
+        meaningList.forEach((meaning) => {
+            const clientDefTitle = meaning.querySelector('.client_def_title');
+            if (clientDefTitle) {
+                data.meaningList.push({
+                    type: clientDefTitle.innerHTML,
+                    wordList: meaning.querySelector('.client_def_list_word_bar').innerHTML.split('；'),
+                });
+            }
+        });
+        callback(data);
+    });
+}
+
+resetStorageDataToHtml();
+
+function resetStorageDataToHtml (data) {
+    if (data) {
+        insertToHtml(data);
+    } else {
+        let list = localStorage.getItem('trans-data', 'data');
+        if (list) {
+            list = list && JSON.parse(list);
+            list.forEach(function (elem) {
+                insertToHtml(elem);
+            });
+        }
+    }
+}
+function insertToHtml (data) {
+    var $selector = $(data.selector);
+    if ($selector.length > 0) {
+        var html = $selector.html();
+        html = html.replace(data.text, data.text + `<span style="background-color: #ff0000; color: #fff;">（${ data.targetText }）</span>`);
+        $selector.html(html);
+    }
+}
+
+
+
+
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=contentScript.js.map

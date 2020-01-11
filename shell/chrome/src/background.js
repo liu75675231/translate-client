@@ -14,5 +14,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 });
 
+chrome.contextMenus.create({
+    id: "some-command",
+    title: "Search in UrbanDictionary",
+    contexts:["all"],
+  });
 
-
+  chrome.contextMenus.onClicked.addListener(function(info, tab) {
+    if (info.menuItemId == "some-command") {
+        console.log("yay!");
+    }
+});

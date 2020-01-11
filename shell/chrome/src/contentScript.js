@@ -25,7 +25,7 @@ document.addEventListener('mouseup', function (e) {
             });
         }
         pos = {
-            left: e.pageX,
+            left: e.pageX + 10,
             top: e.pageY,
         }
         showImg(pos);
@@ -217,3 +217,6 @@ function insertToHtml (data) {
         $selector.html(html);
     }
 }
+
+
+

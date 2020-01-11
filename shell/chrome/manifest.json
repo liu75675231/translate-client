@@ -21,6 +21,8 @@
         "persistent": false
     },
     "permissions": [
+        "contextMenus",
+        "tabs",
         "storage",
         "https://cn.bing.com/"
     ]
