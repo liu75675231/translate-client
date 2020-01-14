@@ -2,6 +2,7 @@ import $ from "jquery";
 import css from "../../chrome/style/index.css";
 import CssSelectorGenerator from "css-selector-generator";
 import Popup from "../../../src/popup.js";
+import { addToStorage } from "../../../src/storage.js";
 
 const selectorGenerator = new CssSelectorGenerator();
 let text = '';
@@ -11,6 +12,21 @@ let pos = {
 }
 var className = '';
 var chineseText = '';
+var selectedFunc = undefined;
+Popup.on("selected", function (data) {
+    selectedFunc(data.selected);
+});
+
+function selectedHandler (text, className) {
+    return function (selected) {
+        addToStorage({
+            text: text,
+            className: className,
+            chineseText: selected,
+      });
+    }
+}
+
 document.addEventListener('mouseup', function (e) {
     if (e.target.id === 'im1') {
         return;
@@ -45,6 +61,7 @@ function showImg (pos) {
                   top: pos.top,
                   left: pos.left + 30,
                 });
+                selectedFunc = selectedHandler(text, className);
                 clearSelect();
                 hideImg();
             }
@@ -133,21 +150,21 @@ function showTranslageTemplateHtml(text) {
     });
 }
 
-function addToStorage () {
-    let originDataStr = localStorage.getItem('trans-data'),
-        list = [];
-    if (originDataStr) {
-        list = JSON.parse(originDataStr);
-    }
-    var data = {
-        text: text,
-        selector: className,
-        targetText: chineseText,
-    }
-    list.push(data);
-    localStorage.setItem("trans-data", JSON.stringify(list))
-    resetStorageDataToHtml(data);
-}
+// function addToStorage () {
+//     let originDataStr = localStorage.getItem('trans-data'),
+//         list = [];
+//     if (originDataStr) {
+//         list = JSON.parse(originDataStr);
+//     }
+//     var data = {
+//         text: text,
+//         selector: className,
+//         targetText: chineseText,
+//     }
+//     list.push(data);
+//     localStorage.setItem("trans-data", JSON.stringify(list))
+//     resetStorageDataToHtml(data);
+// }
 
 function hideTranslateTemplateHtml() {
     const dom = document.getElementById('tw-popup');
