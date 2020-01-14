@@ -1,3 +1,9 @@
+import $ from "jquery";
+import css from "../../chrome/style/index.css";
+import CssSelectorGenerator from "css-selector-generator";
+import Popup from "../../../src/popup.js";
+
+const selectorGenerator = new CssSelectorGenerator();
 let text = '';
 let pos = {
     top: 0,
@@ -11,19 +17,7 @@ document.addEventListener('mouseup', function (e) {
     }
     const selected = getSelectedText();
     if (selected.text ) {
-        let classList = [];
-        e.target.classList.forEach(function (elem) {
-            classList.push('.' + elem);
-        });
-        className = classList.join("");
-        var $domList = $(className);
-        if ($domList.length > 0) {
-            $domList.each(function (index, elem) {
-                if (elem === e.target) {
-                    className += `:eq(${ index })`;
-                }
-            });
-        }
+        className = selectorGenerator.getSelector(e.target);
         pos = {
             left: e.pageX,
             top: e.pageY,
@@ -46,11 +40,14 @@ function showImg (pos) {
             hideImg();
             e.stopPropagation();
             if (text) {
-                showTranslageTemplateHtml(text);
+//                showTranslageTemplateHtml(text);
+                Popup.show(text, {
+                  top: pos.top,
+                  left: pos.left + 30,
+                });
                 clearSelect();
                 hideImg();
             }
-
         });
     }
     img.style = 'position: absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px;';
@@ -102,7 +99,6 @@ function showTranslageTemplateHtml(text) {
     }
 
     doc.style = `top: ${ pos.top }px; left: ${ pos.left }px`;
-    console.log(doc);
     ajaxForBing(text, function (data) {
 
         const pornStrList = [];
@@ -160,38 +156,47 @@ function hideTranslateTemplateHtml() {
     }
 }
 
+function ajaxForDev (callback) {
+  $.ajax({
+    url: "/bing/dict/clientsearch?mkt=zh-CN&setLang=zh&form=BDVEHC&ClientVer=BDDTV3.5.1.4320&q=english",
+    crossDomain: true,
+    success: function (res) {
+      console.log(res);
+      callback && callback(res);
+    },
+  });
+}
+
+
+
 function ajaxForBing (text, callback) {
-    chrome.runtime.sendMessage({
-        action: "ajaxTrans",
-        type: "bing",
-        text: text,
-    }, function (data) {
-        console.log(data.data);
-        var doc = new DOMParser().parseFromString(data.data, "text/html");
-        var data = {
-            title: '',
-            pronList: [],
-            meaningList: [],
-        };
-        data.title = doc.querySelector('.client_def_hd_hd').innerHTML;
+  ajaxForDev(function (data) {
+      var doc = new DOMParser().parseFromString(data, "text/html");
+      var data = {
+          title: '',
+          pronList: [],
+          meaningList: [],
+      };
+      data.title = doc.querySelector('.client_def_hd_hd').innerHTML;
 
-        const pinyinList = doc.querySelectorAll('.client_def_hd_pn');
-        pinyinList.forEach((elem) => {
-            data.pronList.push(elem.innerHTML);
-        });
+      const pinyinList = doc.querySelectorAll('.client_def_hd_pn');
+      pinyinList.forEach((elem) => {
+          data.pronList.push(elem.innerHTML);
+      });
 
-        const meaningList = doc.querySelector ('.client_def_container').querySelectorAll('.client_def_bar');
-        meaningList.forEach((meaning) => {
-            const clientDefTitle = meaning.querySelector('.client_def_title');
-            if (clientDefTitle) {
-                data.meaningList.push({
-                    type: clientDefTitle.innerHTML,
-                    wordList: meaning.querySelector('.client_def_list_word_bar').innerHTML.split('；'),
-                });
-            }
-        });
-        callback(data);
-    });
+      const meaningList = doc.querySelector ('.client_def_container').querySelectorAll('.client_def_bar');
+      meaningList.forEach((meaning) => {
+          const clientDefTitle = meaning.querySelector('.client_def_title');
+          if (clientDefTitle) {
+              data.meaningList.push({
+                  type: clientDefTitle.innerHTML,
+                  wordList: meaning.querySelector('.client_def_list_word_bar').innerHTML.split('；'),
+              });
+          }
+      });
+      callback(data);
+  });
+    
 }
 
 resetStorageDataToHtml();

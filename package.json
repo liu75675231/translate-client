@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd shell/dev && webpack-dev-server --open",
+    "dev": "cd shell/dev && webpack-dev-server",
     "dev:chrome": "cd shell/chrome && webpack --config webpack.config.js --watch"
   },
   "repository": "git+https://github.com/liu75675231/translate-client.git",

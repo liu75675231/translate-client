@@ -1,0 +1,1 @@
+{"title":"exclusive","pronList":["美:&nbsp;[ɪk'sklusɪv] ","英:&nbsp;[ɪk'skluːsɪv] "],"meaningList":[{"type":"n.","wordList":["独家报道","独家新闻","独家专文"]},{"type":"adj.","wordList":["独有的","排外的","不愿接收（较低社会阶层）新成员的","高档的"]}]}

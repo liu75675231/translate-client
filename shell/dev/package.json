@@ -1,7 +1,11 @@
 {
   "name": "@translate-client/shell-dev",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "css-selector-generator": "^1.2.0",
+    "file-loader": "^5.0.2",
+    "jquery": "3.4.1"
+  },
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^3.2.0",

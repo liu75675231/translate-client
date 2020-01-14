@@ -8,6 +8,11 @@
     padding: 10px;
     box-shadow: 1px 1px 3px #999;
     z-index: 99999999;
+    display: none;
+}
+.tw-popup .tw-popup-loading {
+  font-size: 14px;
+  display: none;
 }
 .tw-popup .tw-popup-title {
     font-size: 20px;
