@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: "development",
     entry: {
-        "index": './src/index.js',
+        index: './src/index.js',
     },
     module: {
       rules: [
@@ -20,7 +21,8 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: "./build",
+        contentBase: "./dist",
+        hot: true,
         proxy: {
           "/bing": {
             target: "https://cn.bing.com/",
@@ -37,11 +39,12 @@ module.exports = {
       new HtmlWebpackPlugin({
         title: '开发环境',
         template: path.resolve(__dirname, 'index.html'),
-      })
+        chunks: "index"
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ],
-    devtool: 'cheap-module-source-map',
     output: {
-        path: __dirname + "/build",
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
     },
 }

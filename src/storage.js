@@ -12,3 +12,7 @@ export function addToStorage ({ text, className, chineseText }) {
     list.push(data);
     localStorage.setItem("trans-data", JSON.stringify(list))
 }
+
+export function getDataFromStorage () {
+    return localStorage.getItem('trans-data', 'data');
+}
