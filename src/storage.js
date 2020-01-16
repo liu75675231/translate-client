@@ -1,4 +1,4 @@
-export function addToStorage ({ text, className, chineseText }) {
+export function addToStorage ({ text, selector, targetText, index }) {
     let originDataStr = localStorage.getItem('trans-data'),
         list = [];
     if (originDataStr) {
@@ -6,8 +6,9 @@ export function addToStorage ({ text, className, chineseText }) {
     }
     var data = {
         text: text,
-        selector: className,
-        targetText: chineseText,
+        selector: selector,
+        targetText: targetText,
+        index: index,
     }
     list.push(data);
     localStorage.setItem("trans-data", JSON.stringify(list))
