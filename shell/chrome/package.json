@@ -1,7 +1,10 @@
 {
     "name": "@translate-client/shell-chrome",
     "version": "0.0.0",
-    "dependencies": {},
+    "dependencies": {
+      "css-selector-generator": "^1.2.0",
+      "jquery": "3.4.1"
+    },
     "devDependencies": {
         "webpack": "^4.41.5",
         "webpack-cli": "^3.3.10",

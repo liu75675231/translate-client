@@ -23,7 +23,6 @@ class Popup {
 
       
       _this.hide();
-//      hideTranslateTemplateHtml();
     });
     document.body.appendChild($dom.get(0));
   }
