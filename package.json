@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/liu75675231/translate-client#readme",
   "dependencies": {
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "jsdom": "^15.2.1"
