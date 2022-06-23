@@ -24,6 +24,6 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "jsdom": "^15.2.1"
+    "jsdom": "^16.5.0"
   }
 }
